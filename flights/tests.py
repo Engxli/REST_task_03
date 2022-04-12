@@ -54,10 +54,11 @@ class BookingListTest(APITestCase):
 		bookings = Booking.objects.filter(date__gt=date.today())
 
 		self.assertEqual(len(response.data), bookings.count())
-		booking = bookings[0]
-		self.assertEqual(dict(response.data[0]), {"id" : booking.id, "flight" : booking.flight.id, "date": str(booking.date)})
-		booking = bookings[1]
-		self.assertEqual(dict(response.data[1]), {"id" : booking.id, "flight" : booking.flight.id, "date": str(booking.date)})
+		if(len(response.data) != 0):
+			booking = bookings[0]
+			self.assertEqual(dict(response.data[0]), {"id" : booking.id, "flight" : booking.flight.id, "date": str(booking.date)})
+			booking = bookings[1]
+			self.assertEqual(dict(response.data[1]), {"id" : booking.id, "flight" : booking.flight.id, "date": str(booking.date)})
 
 
 class BookingDetails(APITestCase):
